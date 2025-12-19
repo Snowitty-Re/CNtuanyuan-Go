@@ -70,7 +70,7 @@ func (h *FileHandler) UploadFile(c *gin.Context) {
 
 	// 获取文件信息
 	ext := filepath.Ext(file.Filename)
-	category := getFileCategory(file.Filename)
+	category := getFileCategory(ext)
 
 	// 创建文件记录
 	fileRecord := &models.File{
@@ -170,7 +170,7 @@ func (h *FileHandler) DeleteFile(c *gin.Context) {
 
 // getFileCategory 根据扩展名判断文件分类
 func getFileCategory(ext string) string {
-	ext = filepath.Ext(ext)
+	// ext已经是扩展名（如.jpg），直接比较
 	imageExts := []string{".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp"}
 	videoExts := []string{".mp4", ".avi", ".mov", ".wmv", ".flv"}
 	docExts := []string{".doc", ".docx", ".pdf", ".xls", ".xlsx", ".ppt", ".pptx", ".txt"}
