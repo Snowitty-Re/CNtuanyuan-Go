@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"mime/multipart"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -71,7 +70,7 @@ func (h *FileHandler) UploadFile(c *gin.Context) {
 
 	// 获取文件信息
 	ext := filepath.Ext(file.Filename)
-	category := getFileCategory(ext)
+	category := getFileCategory(file.Filename)
 
 	// 创建文件记录
 	fileRecord := &models.File{
