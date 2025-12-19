@@ -48,6 +48,20 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 			permissions.POST("/assign-role", permissionHandler.AssignRoleToUser)
 			permissions.POST("/assign-permissions", permissionHandler.AssignPermissionsToRole)
 		}
+
+		// 工作流路由（需要认证）
+		workflowHandler := NewWorkflowHandler(db)
+		workflows := api.Group("/workflows", middleware.Auth())
+		{
+			workflows.POST("", workflowHandler.CreateWorkflow)
+			workflows.GET("", workflowHandler.ListWorkflows)
+			workflows.GET("/:id", workflowHandler.GetWorkflow)
+			workflows.POST("/fields", workflowHandler.AddField)
+			workflows.POST("/states", workflowHandler.AddState)
+			workflows.POST("/instances", workflowHandler.CreateInstance)
+			workflows.GET("/instances", workflowHandler.ListInstances)
+			workflows.PUT("/instances/state", workflowHandler.UpdateInstanceState)
+		}
 	}
 }
 

@@ -12,6 +12,10 @@ func RunMigrations(db *gorm.DB) error {
 		&models.User{},
 		&models.Role{},
 		&models.Permission{},
+		&models.Workflow{},
+		&models.WorkflowField{},
+		&models.WorkflowState{},
+		&models.WorkflowInstance{},
 		// 其他模型将在后续阶段添加
 	)
 	return err
