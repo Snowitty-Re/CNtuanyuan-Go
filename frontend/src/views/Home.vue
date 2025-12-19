@@ -54,4 +54,7 @@
 
 <script setup>
 import Layout from '../components/Layout.vue'
+import { useAuthStore } from '../stores/auth'
+
+const authStore = useAuthStore()
 </script>

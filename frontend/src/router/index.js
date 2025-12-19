@@ -80,16 +80,35 @@ const router = createRouter({
 })
 
 // 路由守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
+  // 如果需要认证但未认证，跳转到登录页
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'login', query: { redirect: to.fullPath } })
-  } else if (to.name === 'login' && authStore.isAuthenticated) {
-    next({ name: 'home' })
-  } else {
-    next()
+    return
   }
+
+  // 如果已登录但访问登录页，跳转到首页
+  if (to.name === 'login' && authStore.isAuthenticated) {
+    next({ name: 'home' })
+    return
+  }
+
+  // 如果需要认证且有token但用户信息未加载，尝试加载用户信息
+  if (to.meta.requiresAuth && authStore.isAuthenticated && !authStore.user) {
+    try {
+      await authStore.fetchUser()
+    } catch (error) {
+      // 如果获取用户信息失败，清除token并跳转到登录页
+      console.error('获取用户信息失败:', error)
+      authStore.logout()
+      next({ name: 'login', query: { redirect: to.fullPath } })
+      return
+    }
+  }
+
+  next()
 })
 
 export default router

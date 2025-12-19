@@ -70,10 +70,12 @@ export const useAuthStore = defineStore('auth', () => {
     router.push('/login')
   }
 
-  // 初始化时如果有token，获取用户信息
+  // 初始化时如果有token，获取用户信息（静默失败，不自动登出）
   if (token.value) {
-    fetchUser().catch(() => {
-      logout()
+    fetchUser().catch((err) => {
+      // 只在明确是401错误时才清除token
+      console.warn('获取用户信息失败，但保留token:', err)
+      // 不清除token，让用户手动重试
     })
   }
 

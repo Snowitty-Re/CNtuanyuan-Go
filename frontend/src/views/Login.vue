@@ -172,8 +172,10 @@ async function handleLogin() {
 
   try {
     await authStore.loginUser(form.value)
+    
+    // 登录成功后，跳转到目标页面或首页
     const redirect = route.query.redirect || '/'
-    router.push(redirect)
+    await router.push(redirect)
   } catch (err) {
     // 错误可能来自响应拦截器，message已经设置
     error.value = err.message || err.response?.data?.error || '登录失败，请检查用户名和密码'
