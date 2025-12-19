@@ -175,7 +175,8 @@ async function handleLogin() {
     const redirect = route.query.redirect || '/'
     router.push(redirect)
   } catch (err) {
-    error.value = err.response?.data?.error || err.message || '登录失败，请检查用户名和密码'
+    // 错误可能来自响应拦截器，message已经设置
+    error.value = err.message || err.response?.data?.error || '登录失败，请检查用户名和密码'
   } finally {
     loading.value = false
   }
@@ -191,7 +192,8 @@ async function handleRegister() {
     const redirect = route.query.redirect || '/'
     router.push(redirect)
   } catch (err) {
-    registerError.value = err.response?.data?.error || err.message || '注册失败，请重试'
+    // 错误可能来自响应拦截器，message已经设置
+    registerError.value = err.message || err.response?.data?.error || '注册失败，请重试'
   } finally {
     registerLoading.value = false
   }

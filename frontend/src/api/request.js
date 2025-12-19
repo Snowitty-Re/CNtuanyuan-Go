@@ -27,10 +27,19 @@ request.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
+      // 后端错误响应格式: {success: false, error: "错误信息"}
+      const errorData = error.response.data
+      if (errorData && errorData.error) {
+        error.message = errorData.error
+      }
+      
       switch (error.response.status) {
         case 401:
           localStorage.removeItem('token')
-          router.push('/login')
+          // 只在非登录页面时跳转
+          if (router.currentRoute.value.path !== '/login') {
+            router.push('/login')
+          }
           break
         case 403:
           console.error('权限不足')
