@@ -34,6 +34,30 @@ const router = createRouter({
       component: () => import('../views/WorkflowDetail.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/forms',
+      name: 'formList',
+      component: () => import('../views/FormList.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/forms/builder',
+      name: 'formBuilder',
+      component: () => import('../views/FormBuilder.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/forms/:id',
+      name: 'formDetail',
+      component: () => import('../views/FormFill.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/forms/:id/fill',
+      name: 'formFill',
+      component: () => import('../views/FormFill.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 
