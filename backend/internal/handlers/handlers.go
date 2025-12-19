@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/config"
+	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/middleware"
 	"gorm.io/gorm"
 )
 
@@ -27,9 +28,14 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 	// API路由组
 	api := r.Group("/api/v1")
 	{
-		// 认证相关路由将在后续阶段添加
-		// api.POST("/auth/login", Login)
-		// api.POST("/auth/register", Register)
+		// 认证相关路由
+		authHandler := NewAuthHandler(db)
+		auth := api.Group("/auth")
+		{
+			auth.POST("/register", authHandler.Register)
+			auth.POST("/login", authHandler.Login)
+			auth.GET("/profile", middleware.Auth(), authHandler.GetProfile)
+		}
 	}
 }
 

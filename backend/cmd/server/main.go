@@ -7,6 +7,7 @@ import (
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/config"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/handlers"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/middleware"
+	"github.com/Snowitty-Re/CNtuanyuan-Go/migrations"
 )
 
 func main() {
@@ -23,7 +24,9 @@ func main() {
 	}
 
 	// 运行数据库迁移
-	// migrations.RunMigrations(db) // 将在后续阶段启用
+	if err := migrations.RunMigrations(db); err != nil {
+		log.Fatal("Failed to run migrations:", err)
+	}
 
 	// 设置Gin模式
 	if cfg.Environment == "production" {
