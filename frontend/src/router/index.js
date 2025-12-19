@@ -100,11 +100,13 @@ router.beforeEach(async (to, from, next) => {
     try {
       await authStore.fetchUser()
     } catch (error) {
-      // 如果获取用户信息失败，清除token并跳转到登录页
-      console.error('获取用户信息失败:', error)
-      authStore.logout()
-      next({ name: 'login', query: { redirect: to.fullPath } })
-      return
+      // 如果获取用户信息失败（401），清除token并跳转到登录页
+      if (error.response?.status === 401 || error.message?.includes('401') || error.message?.includes('未授权')) {
+        authStore.logout()
+        next({ name: 'login', query: { redirect: to.fullPath } })
+        return
+      }
+      // 其他错误不影响导航，继续执行
     }
   }
 
