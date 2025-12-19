@@ -16,6 +16,12 @@ const router = createRouter({
       component: () => import('../views/Login.vue'),
       meta: { requiresAuth: false },
     },
+    {
+      path: '/missing-persons',
+      name: 'missingPersonList',
+      component: () => import('../views/MissingPersonList.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

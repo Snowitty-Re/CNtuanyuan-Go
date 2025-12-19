@@ -40,7 +40,7 @@ func (s *FormService) CreateForm(name, description, formConfig string) (*models.
 // SubmitForm 提交表单
 func (s *FormService) SubmitForm(formID uint, data string, submittedBy uint) (*models.FormSubmission, error) {
 	// 验证表单是否存在
-	form, err := s.formRepo.GetByID(formID)
+	_, err := s.formRepo.GetByID(formID)
 	if err != nil {
 		return nil, errors.New("表单不存在")
 	}
