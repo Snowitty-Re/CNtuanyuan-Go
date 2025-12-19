@@ -19,6 +19,12 @@ func RunMigrations(db *gorm.DB) error {
 		&models.MissingPerson{},
 		&models.Form{},
 		&models.FormSubmission{},
+		&models.Notice{},
+		&models.NoticeRead{},
+		&models.Message{},
+		&models.File{},
+		&models.Task{},
+		&models.AuditLog{},
 	)
 	return err
 }
