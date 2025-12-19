@@ -43,7 +43,6 @@ func main() {
 
 	// 静态文件服务（用于上传的文件）
 	r.Static("/uploads", "./uploads")
-	r.Static("/uploads/files", "./uploads/files")
 
 	// 初始化处理器
 	handlers.InitHandlers(r, db, cfg)
