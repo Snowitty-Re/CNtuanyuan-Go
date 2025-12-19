@@ -22,6 +22,9 @@ func main() {
 		log.Fatal("Failed to initialize database:", err)
 	}
 
+	// 运行数据库迁移
+	// migrations.RunMigrations(db) // 将在后续阶段启用
+
 	// 设置Gin模式
 	if cfg.Environment == "production" {
 		gin.SetMode(gin.ReleaseMode)

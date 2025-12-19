@@ -12,6 +12,15 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"status": "ok",
+			"message": "Server is running",
+		})
+	})
+
+	// API信息
+	r.GET("/api/v1", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"name":    "志愿者OA系统 API",
+			"version": "1.0.0",
 		})
 	})
 
