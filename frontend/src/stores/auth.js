@@ -13,10 +13,15 @@ export const useAuthStore = defineStore('auth', () => {
   async function loginUser(credentials) {
     try {
       const response = await login(credentials)
-      token.value = response.data.token
-      user.value = response.data.user
-      localStorage.setItem('token', token.value)
-      return response
+      // 后端返回格式: {success: true, data: {user: {...}, token: "..."}, message: "..."}
+      if (response.success && response.data) {
+        token.value = response.data.token
+        user.value = response.data.user
+        localStorage.setItem('token', token.value)
+        return response
+      } else {
+        throw new Error(response.error || '登录失败')
+      }
     } catch (error) {
       throw error
     }
@@ -26,10 +31,15 @@ export const useAuthStore = defineStore('auth', () => {
   async function registerUser(userData) {
     try {
       const response = await register(userData)
-      token.value = response.data.token
-      user.value = response.data.user
-      localStorage.setItem('token', token.value)
-      return response
+      // 后端返回格式: {success: true, data: {user: {...}, token: "..."}, message: "..."}
+      if (response.success && response.data) {
+        token.value = response.data.token
+        user.value = response.data.user
+        localStorage.setItem('token', token.value)
+        return response
+      } else {
+        throw new Error(response.error || '注册失败')
+      }
     } catch (error) {
       throw error
     }
@@ -39,8 +49,13 @@ export const useAuthStore = defineStore('auth', () => {
   async function fetchUser() {
     try {
       const response = await getProfile()
-      user.value = response.data
-      return response
+      // 后端返回格式: {success: true, data: {...}, message: "..."}
+      if (response.success && response.data) {
+        user.value = response.data
+        return response
+      } else {
+        throw new Error(response.error || '获取用户信息失败')
+      }
     } catch (error) {
       logout()
       throw error

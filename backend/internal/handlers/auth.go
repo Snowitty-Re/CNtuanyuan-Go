@@ -64,14 +64,28 @@ func (h *AuthHandler) Login(c *gin.Context) {
 
 // GetProfile 获取当前用户信息
 func (h *AuthHandler) GetProfile(c *gin.Context) {
-	userID, exists := c.Get("user_id")
+	userIDInterface, exists := c.Get("user_id")
 	if !exists {
 		utils.Unauthorized(c, "未授权")
 		return
 	}
 
+	// 安全地转换user_id
+	var userID uint
+	switch v := userIDInterface.(type) {
+	case uint:
+		userID = v
+	case float64:
+		userID = uint(v)
+	case int:
+		userID = uint(v)
+	default:
+		utils.Unauthorized(c, "无效的用户ID")
+		return
+	}
+
 	userRepo := repositories.NewUserRepository(h.db)
-	user, err := userRepo.GetByID(userID.(uint))
+	user, err := userRepo.GetByID(userID)
 	if err != nil {
 		utils.NotFound(c, "用户不存在")
 		return

@@ -58,8 +58,25 @@ func Auth() gin.HandlerFunc {
 			return
 		}
 
-		c.Set("user_id", claims["user_id"])
-		c.Set("username", claims["username"])
+		// 转换user_id为uint（JWT claims中的数字可能是float64）
+		var userID uint
+		if uid, ok := claims["user_id"].(float64); ok {
+			userID = uint(uid)
+		} else if uid, ok := claims["user_id"].(uint); ok {
+			userID = uid
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"error":   true,
+				"message": "Invalid user_id in token",
+			})
+			c.Abort()
+			return
+		}
+
+		c.Set("user_id", userID)
+		if username, ok := claims["username"].(string); ok {
+			c.Set("username", username)
+		}
 		c.Next()
 	}
 }
