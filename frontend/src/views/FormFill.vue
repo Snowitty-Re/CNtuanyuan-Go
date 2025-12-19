@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8 max-w-2xl">
+  <Layout>
+    <div class="max-w-2xl mx-auto">
       <div v-if="loading" class="text-center py-12">加载中...</div>
 
       <div v-else-if="form" class="bg-white rounded-lg shadow p-8">
@@ -81,12 +81,13 @@
         </form>
       </div>
     </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import Layout from '../components/Layout.vue'
 import { getForm, submitForm } from '../api/form'
 
 const route = useRoute()

@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8">
+  <Layout>
       <h1 class="text-3xl font-bold text-gray-900 mb-8">仪表盘</h1>
 
       <!-- 统计卡片 -->
@@ -95,12 +94,12 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import Layout from '../components/Layout.vue'
 import { getMissingPersons } from '../api/missingPerson'
 import { getWorkflows } from '../api/workflow'
 import { getForms } from '../api/form'

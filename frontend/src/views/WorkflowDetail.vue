@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8">
+  <Layout>
       <div class="mb-6">
         <button
           @click="$router.back()"
@@ -183,13 +182,13 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import Layout from '../components/Layout.vue'
 import { getWorkflow, addField, addState } from '../api/workflow'
 
 const route = useRoute()

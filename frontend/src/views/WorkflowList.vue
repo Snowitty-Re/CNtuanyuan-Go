@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8">
+  <Layout>
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-gray-900">工作流管理</h1>
         <button
@@ -105,13 +104,13 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import Layout from '../components/Layout.vue'
 import { getWorkflows, createWorkflow } from '../api/workflow'
 
 const router = useRouter()

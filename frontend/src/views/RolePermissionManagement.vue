@@ -1,6 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <div class="container mx-auto px-4 py-8">
+  <Layout>
       <h1 class="text-3xl font-bold text-gray-900 mb-8">角色权限管理</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -81,12 +80,12 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import Layout from '../components/Layout.vue'
 import { getRoles, getPermissions } from '../api/permission'
 
 const roles = ref([])

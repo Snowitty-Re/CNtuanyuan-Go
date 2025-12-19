@@ -1,25 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <nav class="bg-white shadow-sm border-b">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center justify-between">
-          <h1 class="text-xl font-bold text-gray-900">志愿者OA系统</h1>
-          <div class="flex items-center gap-4">
-            <span v-if="authStore.user" class="text-gray-700">
-              {{ authStore.user.username }}
-            </span>
-            <button
-              @click="handleLogout"
-              class="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
-            >
-              退出登录
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container mx-auto px-4 py-8">
+  <Layout>
       <div class="bg-white rounded-lg shadow p-6">
         <h2 class="text-2xl font-bold text-gray-900 mb-4">欢迎使用志愿者OA系统</h2>
         <p class="text-gray-600 mb-6">
@@ -69,18 +49,9 @@
           </router-link>
         </div>
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
-
-const router = useRouter()
-const authStore = useAuthStore()
-
-function handleLogout() {
-  authStore.logout()
-}
+import Layout from '../components/Layout.vue'
 </script>
