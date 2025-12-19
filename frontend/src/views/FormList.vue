@@ -38,8 +38,7 @@
       <div v-if="forms.length === 0" class="text-center py-12 text-gray-500">
         暂无表单，点击上方按钮创建一个
       </div>
-    </div>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
