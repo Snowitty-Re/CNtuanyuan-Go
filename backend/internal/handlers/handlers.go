@@ -62,6 +62,19 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 			workflows.GET("/instances", workflowHandler.ListInstances)
 			workflows.PUT("/instances/state", workflowHandler.UpdateInstanceState)
 		}
+
+		// 走失人员路由（需要认证）
+		missingPersonHandler := NewMissingPersonHandler(db, "./uploads")
+		missingPersons := api.Group("/missing-persons", middleware.Auth())
+		{
+			missingPersons.POST("", missingPersonHandler.CreateMissingPerson)
+			missingPersons.GET("", missingPersonHandler.ListMissingPersons)
+			missingPersons.GET("/search", missingPersonHandler.SearchMissingPersons)
+			missingPersons.GET("/:id", missingPersonHandler.GetMissingPerson)
+			missingPersons.PUT("/:id", missingPersonHandler.UpdateMissingPerson)
+			missingPersons.DELETE("/:id", missingPersonHandler.DeleteMissingPerson)
+			missingPersons.POST("/upload-photo", missingPersonHandler.UploadPhoto)
+		}
 	}
 }
 

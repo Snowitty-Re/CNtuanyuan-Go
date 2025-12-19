@@ -16,6 +16,7 @@ func RunMigrations(db *gorm.DB) error {
 		&models.WorkflowField{},
 		&models.WorkflowState{},
 		&models.WorkflowInstance{},
+		&models.MissingPerson{},
 		// 其他模型将在后续阶段添加
 	)
 	return err
