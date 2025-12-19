@@ -76,6 +76,30 @@ const router = createRouter({
       component: () => import('../views/RolePermissionManagement.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/notices',
+      name: 'noticeList',
+      component: () => import('../views/NoticeList.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/messages',
+      name: 'messageCenter',
+      component: () => import('../views/MessageCenter.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/files',
+      name: 'fileManagement',
+      component: () => import('../views/FileManagement.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/tasks',
+      name: 'taskManagement',
+      component: () => import('../views/TaskManagement.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

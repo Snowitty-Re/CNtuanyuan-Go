@@ -84,6 +84,30 @@
             >
               <span class="font-medium text-gray-900">表单管理</span>
             </router-link>
+            <router-link
+              to="/notices"
+              class="block p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+            >
+              <span class="font-medium text-gray-900">通知公告</span>
+            </router-link>
+            <router-link
+              to="/messages"
+              class="block p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+            >
+              <span class="font-medium text-gray-900">消息中心</span>
+            </router-link>
+            <router-link
+              to="/files"
+              class="block p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+            >
+              <span class="font-medium text-gray-900">文件管理</span>
+            </router-link>
+            <router-link
+              to="/tasks"
+              class="block p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition"
+            >
+              <span class="font-medium text-gray-900">任务管理</span>
+            </router-link>
           </div>
         </div>
 

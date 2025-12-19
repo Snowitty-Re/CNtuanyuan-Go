@@ -45,6 +45,34 @@
             >
               权限管理
             </router-link>
+            <router-link
+              to="/notices"
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+              active-class="bg-blue-50 text-blue-700"
+            >
+              通知公告
+            </router-link>
+            <router-link
+              to="/messages"
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+              active-class="bg-blue-50 text-blue-700"
+            >
+              消息中心
+            </router-link>
+            <router-link
+              to="/files"
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+              active-class="bg-blue-50 text-blue-700"
+            >
+              文件管理
+            </router-link>
+            <router-link
+              to="/tasks"
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+              active-class="bg-blue-50 text-blue-700"
+            >
+              任务管理
+            </router-link>
           </div>
           <div class="flex items-center space-x-4">
             <div v-if="authStore.user" class="hidden md:block text-sm text-gray-700">
@@ -105,6 +133,34 @@
             class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
           >
             权限管理
+          </router-link>
+          <router-link
+            to="/notices"
+            @click="mobileMenuOpen = false"
+            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+            通知公告
+          </router-link>
+          <router-link
+            to="/messages"
+            @click="mobileMenuOpen = false"
+            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+            消息中心
+          </router-link>
+          <router-link
+            to="/files"
+            @click="mobileMenuOpen = false"
+            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+            文件管理
+          </router-link>
+          <router-link
+            to="/tasks"
+            @click="mobileMenuOpen = false"
+            class="block px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+            任务管理
           </router-link>
         </div>
       </div>
