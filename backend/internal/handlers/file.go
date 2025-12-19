@@ -46,7 +46,7 @@ func (h *FileHandler) UploadFile(c *gin.Context) {
 
 	// 生成文件名
 	filename := time.Now().Format("20060102150405") + "_" + file.Filename
-	filepath := filepath.Join(h.uploadDir, filename)
+	filePath := filepath.Join(h.uploadDir, filename)
 
 	// 保存文件
 	src, err := file.Open()
@@ -56,7 +56,7 @@ func (h *FileHandler) UploadFile(c *gin.Context) {
 	}
 	defer src.Close()
 
-	dst, err := os.Create(filepath)
+	dst, err := os.Create(filePath)
 	if err != nil {
 		utils.InternalServerError(c, err.Error())
 		return
