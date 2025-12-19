@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Layout from '../components/Layout.vue'
 import { getForm, submitForm } from '../api/form'
@@ -106,6 +106,17 @@ const formFields = computed(() => {
   }
 })
 
+// 监听formFields变化，初始化表单数据
+watchEffect(() => {
+  if (formFields.value.length > 0) {
+    formFields.value.forEach(field => {
+      if (!(field.id in formData.value)) {
+        formData.value[field.id] = ''
+      }
+    })
+  }
+})
+
 function getOptions(optionsString) {
   if (!optionsString) return []
   return optionsString.split('\n').filter(opt => opt.trim())
@@ -116,10 +127,6 @@ async function loadForm() {
     const id = route.params.id
     const response = await getForm(id)
     form.value = response.data
-    // 初始化表单数据
-    formFields.value.forEach(field => {
-      formData.value[field.id] = ''
-    })
   } catch (error) {
     console.error('加载表单失败:', error)
   } finally {
