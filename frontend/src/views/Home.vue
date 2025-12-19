@@ -38,19 +38,35 @@
           </div>
         </div>
 
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-            <h4 class="font-semibold text-blue-900 mb-2">权限管理</h4>
-            <p class="text-sm text-blue-700">完整的RBAC权限管理系统</p>
-          </div>
-          <div class="bg-green-50 rounded-lg p-4 border border-green-200">
-            <h4 class="font-semibold text-green-900 mb-2">工作流</h4>
-            <p class="text-sm text-green-700">可自定义字段的工作流系统</p>
-          </div>
-          <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <router-link
+            to="/dashboard"
+            class="bg-blue-50 rounded-lg p-4 border border-blue-200 hover:bg-blue-100 transition"
+          >
+            <h4 class="font-semibold text-blue-900 mb-2">仪表盘</h4>
+            <p class="text-sm text-blue-700">查看系统统计和快速操作</p>
+          </router-link>
+          <router-link
+            to="/missing-persons"
+            class="bg-purple-50 rounded-lg p-4 border border-purple-200 hover:bg-purple-100 transition"
+          >
             <h4 class="font-semibold text-purple-900 mb-2">走失人员</h4>
             <p class="text-sm text-purple-700">走失人员信息管理数据库</p>
-          </div>
+          </router-link>
+          <router-link
+            to="/workflows"
+            class="bg-green-50 rounded-lg p-4 border border-green-200 hover:bg-green-100 transition"
+          >
+            <h4 class="font-semibold text-green-900 mb-2">工作流</h4>
+            <p class="text-sm text-green-700">可自定义字段的工作流系统</p>
+          </router-link>
+          <router-link
+            to="/forms"
+            class="bg-yellow-50 rounded-lg p-4 border border-yellow-200 hover:bg-yellow-100 transition"
+          >
+            <h4 class="font-semibold text-yellow-900 mb-2">表单管理</h4>
+            <p class="text-sm text-yellow-700">自定义表单构建和管理</p>
+          </router-link>
         </div>
       </div>
     </div>

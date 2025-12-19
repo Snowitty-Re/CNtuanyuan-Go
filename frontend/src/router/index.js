@@ -58,6 +58,24 @@ const router = createRouter({
       component: () => import('../views/FormFill.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/Dashboard.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/users',
+      name: 'userManagement',
+      component: () => import('../views/UserManagement.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/roles-permissions',
+      name: 'rolePermissionManagement',
+      component: () => import('../views/RolePermissionManagement.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 
