@@ -54,4 +54,3 @@ func (r *PermissionRepository) List(offset, limit int) ([]models.Permission, int
 	err := r.db.Offset(offset).Limit(limit).Find(&permissions).Error
 	return permissions, total, err
 }
-

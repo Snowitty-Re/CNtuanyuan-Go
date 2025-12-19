@@ -3,8 +3,8 @@ package utils
 import (
 	"time"
 
-	"github.com/golang-jwt/jwt/v5"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/config"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // GenerateToken 生成JWT Token
@@ -40,4 +40,3 @@ func ParseToken(tokenString string) (jwt.MapClaims, error) {
 
 	return nil, jwt.ErrSignatureInvalid
 }
-

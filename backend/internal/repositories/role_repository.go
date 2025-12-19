@@ -69,4 +69,3 @@ func (r *RoleRepository) AssignPermissions(roleID uint, permissionIDs []uint) er
 
 	return r.db.Model(role).Association("Permissions").Replace(permissions)
 }
-

@@ -61,4 +61,3 @@ func (r *UserRepository) List(offset, limit int) ([]models.User, int64, error) {
 	err := r.db.Offset(offset).Limit(limit).Preload("Roles").Find(&users).Error
 	return users, total, err
 }
-

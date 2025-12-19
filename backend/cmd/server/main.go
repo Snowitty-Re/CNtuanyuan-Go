@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"github.com/gin-gonic/gin"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/config"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/handlers"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/middleware"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/migrations"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -54,4 +54,3 @@ func main() {
 		log.Fatal("Failed to start server:", err)
 	}
 }
-

@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/repositories"
 	"github.com/Snowitty-Re/CNtuanyuan-Go/internal/utils"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -50,4 +50,3 @@ func RequirePermissionWithDB(db *gorm.DB, resource, action string) gin.HandlerFu
 		c.Next()
 	}
 }
-

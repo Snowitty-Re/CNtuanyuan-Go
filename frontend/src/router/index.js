@@ -22,6 +22,18 @@ const router = createRouter({
       component: () => import('../views/MissingPersonList.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/workflows',
+      name: 'workflowList',
+      component: () => import('../views/WorkflowList.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/workflows/:id',
+      name: 'workflowDetail',
+      component: () => import('../views/WorkflowDetail.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

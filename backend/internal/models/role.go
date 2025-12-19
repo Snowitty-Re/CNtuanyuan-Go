@@ -8,10 +8,10 @@ import (
 
 // Role 角色模型
 type Role struct {
-	ID          uint           `gorm:"primarykey" json:"id"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
-	DeletedAt   gorm.DeletedAt `gorm:"index" json:"-"`
+	ID        uint           `gorm:"primarykey" json:"id"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 
 	Name        string `gorm:"uniqueIndex;not null" json:"name"`
 	Description string `json:"description"`
@@ -45,4 +45,3 @@ type Permission struct {
 func (Permission) TableName() string {
 	return "permissions"
 }
-
