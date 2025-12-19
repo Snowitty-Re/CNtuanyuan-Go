@@ -36,6 +36,18 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 			auth.POST("/login", authHandler.Login)
 			auth.GET("/profile", middleware.Auth(), authHandler.GetProfile)
 		}
+
+		// 权限管理路由（需要认证）
+		permissionHandler := NewPermissionHandler(db)
+		permissions := api.Group("/permissions", middleware.Auth())
+		{
+			permissions.POST("/roles", permissionHandler.CreateRole)
+			permissions.GET("/roles", permissionHandler.ListRoles)
+			permissions.POST("/permissions", permissionHandler.CreatePermission)
+			permissions.GET("/permissions", permissionHandler.ListPermissions)
+			permissions.POST("/assign-role", permissionHandler.AssignRoleToUser)
+			permissions.POST("/assign-permissions", permissionHandler.AssignPermissionsToRole)
+		}
 	}
 }
 
