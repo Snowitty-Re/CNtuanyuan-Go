@@ -86,6 +86,57 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 			forms.POST("/submit", formHandler.SubmitForm)
 			forms.GET("/submissions", formHandler.ListSubmissions)
 		}
+
+		// OA基础功能路由（需要认证）
+		// 通知公告
+		noticeHandler := NewNoticeHandler(db)
+		notices := api.Group("/notices", middleware.Auth(), middleware.Audit(db))
+		{
+			notices.POST("", noticeHandler.CreateNotice)
+			notices.GET("", noticeHandler.ListNotices)
+			notices.GET("/:id", noticeHandler.GetNotice)
+			notices.POST("/:id/read", noticeHandler.MarkAsRead)
+			notices.GET("/unread/count", noticeHandler.GetUnreadCount)
+		}
+
+		// 消息中心
+		messageHandler := NewMessageHandler(db)
+		messages := api.Group("/messages", middleware.Auth(), middleware.Audit(db))
+		{
+			messages.POST("", messageHandler.SendMessage)
+			messages.GET("", messageHandler.ListMessages)
+			messages.GET("/:id", messageHandler.GetMessage)
+			messages.POST("/:id/read", messageHandler.MarkAsRead)
+			messages.GET("/unread/count", messageHandler.GetUnreadCount)
+		}
+
+		// 文件管理
+		fileHandler := NewFileHandler(db, "./uploads/files")
+		files := api.Group("/files", middleware.Auth(), middleware.Audit(db))
+		{
+			files.POST("/upload", fileHandler.UploadFile)
+			files.GET("", fileHandler.ListFiles)
+			files.GET("/:id", fileHandler.GetFile)
+			files.DELETE("/:id", fileHandler.DeleteFile)
+		}
+
+		// 任务管理
+		taskHandler := NewTaskHandler(db)
+		tasks := api.Group("/tasks", middleware.Auth(), middleware.Audit(db))
+		{
+			tasks.POST("", taskHandler.CreateTask)
+			tasks.GET("", taskHandler.ListTasks)
+			tasks.GET("/:id", taskHandler.GetTask)
+			tasks.PUT("/:id", taskHandler.UpdateTask)
+			tasks.DELETE("/:id", taskHandler.DeleteTask)
+		}
+
+		// 审计日志
+		auditLogHandler := NewAuditLogHandler(db)
+		logs := api.Group("/audit-logs", middleware.Auth())
+		{
+			logs.GET("", auditLogHandler.ListLogs)
+		}
 	}
 }
 
