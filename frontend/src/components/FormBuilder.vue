@@ -70,7 +70,10 @@
                   class="w-full px-3 py-2 border border-gray-300 rounded-lg"
                   disabled
                 >
-                  <option>选项1</option>
+                  <option>请选择</option>
+                  <option v-for="option in getOptions(field.options)" :key="option">
+                    {{ option }}
+                  </option>
                 </select>
                 <textarea
                   v-else-if="field.type === 'textarea'"
@@ -225,6 +228,11 @@ function removeField(index) {
 function previewForm() {
   // 预览功能可以在父组件中实现
   emit('preview', fields.value)
+}
+
+function getOptions(optionsString) {
+  if (!optionsString) return []
+  return optionsString.split('\n').filter(opt => opt.trim())
 }
 </script>
 
