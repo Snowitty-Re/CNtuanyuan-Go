@@ -75,6 +75,17 @@ func InitHandlers(r *gin.Engine, db *gorm.DB, cfg *config.Config) {
 			missingPersons.DELETE("/:id", missingPersonHandler.DeleteMissingPerson)
 			missingPersons.POST("/upload-photo", missingPersonHandler.UploadPhoto)
 		}
+
+		// 表单路由（需要认证）
+		formHandler := NewFormHandler(db)
+		forms := api.Group("/forms", middleware.Auth())
+		{
+			forms.POST("", formHandler.CreateForm)
+			forms.GET("", formHandler.ListForms)
+			forms.GET("/:id", formHandler.GetForm)
+			forms.POST("/submit", formHandler.SubmitForm)
+			forms.GET("/submissions", formHandler.ListSubmissions)
+		}
 	}
 }
 
