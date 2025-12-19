@@ -127,8 +127,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getMissingPersons, deleteMissingPerson } from '../api/missingPerson'
 import { useRouter } from 'vue-router'
+import Layout from '../components/Layout.vue'
+import { getMissingPersons, deleteMissingPerson } from '../api/missingPerson'
 
 const router = useRouter()
 const persons = ref([])
